@@ -14,7 +14,7 @@ describe('Launch', function() {
     await driver.quit();
   })
   it('Launch', async function() {
-    await driver.get("http://127.0.0.1:3000/")
+    await driver.get("http://sudoko.azurewebsites.net")
     await driver.manage().window().setRect(1366, 728)
     await driver.findElement(By.linkText("New")).click()
   })

@@ -5,91 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link href="./css/styles.css" rel="stylesheet" type="text/css">
     <style>
-    *{
-        padding:0;
-        margin:0;
-        box-sizing: border-box;   
-    }
-
-    html,body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    h1 {
-        font-size: 1.7rem;
-        padding-bottom: 20px;
-    }
-
-    table {
-        border: 3px solid black;
-        border-collapse: collapse;
-        margin-left:50px;
-        font-size: 16pt;
-        margin: 50px 100px;
-    }
-    td {
-        border: 2px solid black;
-        width:40px;
-        height:40px;
+      *{
+          padding:0;
+          margin:0;
+          box-sizing: border-box;   
+      }
+  
+      html,body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+  
+      h1 {
+          font-size: 1.7rem;
+          padding-bottom: 20px;
+      }
+  
+      table {
+          border: 3px solid black;
+          border-collapse: collapse;
+          margin-left:50px;
+          font-size: 16pt;
+          margin: 50px 100px;
+      }
+      td {
+          border: 2px solid black;
+          width:40px;
+          height:40px;
+          text-align: center;
+          background-color:moccasin;
+      }
+      input{
+          overflow:hidden;
+          border:none;
+          background-color:transparent;
+          text-align: center;
+          width:75%;
+          font-size:16pt;
+      }
+      /* Utility Classes */
+      .container {
+        margin: auto;
+        max-width: 1100px;
+        overflow: auto;
+        padding: 0 20px;
+      }
+  
+      /* Navbar */
+      #navbar {
+        background: #333;
+        color: #fff;
+        overflow: auto;
+      }
+  
+      #navbar a {
+        color: #fff;
+        text-decoration: none;
+      }
+  
+      #navbar h1 {
+        float: left;
+        padding-top: 20px;
+      }
+  
+      #navbar ul {
+        list-style: none;
+        float: right;
+      }
+  
+      #navbar ul li {
+        float: left;
+      }
+  
+      #navbar ul li a {
+        display: block;
+        padding: 20px;
         text-align: center;
-        background-color:moccasin;
-    }
-    input{
-        overflow:hidden;
-        border:none;
-        background-color:transparent;
-        text-align: center;
-        width:75%;
-        font-size:16pt;
-    }
-    /* Utility Classes */
-    .container {
-      margin: auto;
-      max-width: 1100px;
-      overflow: auto;
-      padding: 0 20px;
-    }
-
-    /* Navbar */
-    #navbar {
-      background: #333;
-      color: #fff;
-      overflow: auto;
-    }
-
-    #navbar a {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    #navbar h1 {
-      float: left;
-      padding-top: 20px;
-    }
-
-    #navbar ul {
-      list-style: none;
-      float: right;
-    }
-
-    #navbar ul li {
-      float: left;
-    }
-
-    #navbar ul li a {
-      display: block;
-      padding: 20px;
-      text-align: center;
-    }
-
-    #navbar ul li a:hover, 
-    #navbar ul li a.current {
-      background: #444;
-      color: #f7c08a;
-    }
-</style>
-</head>
+      }
+  
+      #navbar ul li a:hover, 
+      #navbar ul li a.current {
+        background: #444;
+        color: #f7c08a;
+      }
+    </style>
+  </head>
 <body onload="getPuzzle()">
     <nav id="navbar">
         <div class="container">
@@ -105,13 +106,13 @@
     <table id="tblPuzzle"></table>
 
     <script>
-
+     
     function buildPuzzleTable(puzzleData) {
         var row;
         var cell;
         var tbl = document.getElementById("tblPuzzle");
-
         var numRows = tbl.rows.length;
+ 
         console.log(numRows);
         for(i = 0; i < numRows; i++) {
             tbl.deleteRow(0);
@@ -127,36 +128,26 @@
                     cell.style.backgroundColor = "white";                    
                     var input = document.createElement("input");
                     input.setAttribute('type', 'text');
-                    // input.setAttribute('max', '9');
-                    // input.setAttribute('min', '1');
                     input.pattern = "[0-9]";
                     input.setAttribute('maxlength', '1');
                     input.style.backgroundColor = "transparent";
                     
-                    // input.addEventListener("input", function checkEntry(e){
-                        // alert(e.data);
-                        // if (IsNumeric(e.data)){
-                        //     e.target.value = '9';
-                        // };
-                    // });
-
                     cell.appendChild(input);
                 }
             }
         }
     }
 
-
     function getPuzzle(){
+
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var puzzleData = JSON.parse(this.responseText);
             buildPuzzleTable(puzzleData);
-            //document.getElementById("demo").innerHTML = myObj.rows[0];
         }
         };
-        xmlhttp.open("GET", "http://127.0.0.1:3000/sudoko", true);
+        xmlhttp.open("GET", "http://sudoko.azurewebsites.net/sudoko", true);
         xmlhttp.send();
     }
     </script>
